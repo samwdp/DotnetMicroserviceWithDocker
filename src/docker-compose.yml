@@ -1,0 +1,54 @@
+version: "3.4"
+
+services:
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3-management
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=password
+  ms-sql-server:
+    image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Pa55word"
+      MSSQL_PID: "Express"
+    ports:
+      - "1433:1433"
+  userservice:
+    build:
+      context: .
+      dockerfile: UserService/Dockerfile
+    depends_on:
+      - rabbitmq
+      - ms-sql-server
+    environment:
+      DBServer: "ms-sql-server"
+    ports:
+      - "5101:80"
+    restart: on-failure
+  postservice:
+    build:
+      context: .
+      dockerfile: PostService/Dockerfile
+    depends_on:
+      - rabbitmq
+      - ms-sql-server
+    environment:
+      DBServer: "ms-sql-server"
+    restart: on-failure
+    ports:
+      - "5102:80"
+  blog:
+    build:
+      context: .
+      dockerfile: Blog/Dockerfile
+    depends_on:
+      - postservice
+      - userservice
+    ports:
+      - "5100:80"
+    restart: on-failure

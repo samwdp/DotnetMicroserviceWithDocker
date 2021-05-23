@@ -1,0 +1,81 @@
+** Post API
+#+begin_src restclient
+GET http://localhost:5102/api/user
+#+end_src
+
+
+** User API
+#+begin_src restclient
+GET http://localhost:5101/api/user
+#+end_src
+
+#+RESULTS:
+#+BEGIN_SRC js
+[
+  {
+    "id": 1,
+    "name": "Sam",
+    "mail": "sam@mail.com",
+    "otherData": "Is a man"
+  }
+]
+// GET http://localhost:5101/api/user
+// HTTP/1.1 200 OK
+// Date: Sat, 22 May 2021 20:54:02 GMT
+// Content-Type: application/json; charset=utf-8
+// Server: Kestrel
+// Transfer-Encoding: chunked
+// Request duration: 0.068460s
+#+END_SRC
+
+
+#+begin_src restclient
+POST http://localhost:5101/api/user
+Content-Type: application/json
+{
+    "name":"Sam",
+    "mail":"sam@mail.com",
+    "otherData":"Is a man"
+}
+#+end_src
+
+#+RESULTS:
+#+BEGIN_SRC js
+// POST http://localhost:5101/api/user
+// HTTP/1.1 500 Internal Server Error
+// Date: Fri, 21 May 2021 21:03:22 GMT
+// Server: Kestrel
+// Content-Length: 0
+// Request duration: 0.019246s
+#+END_SRC
+
+#+begin_src restclient
+POST http://localhost:5101/api/user
+Content-Type: application/json
+{
+    "name":"Ellie",
+    "mail":"ellie@mail.com",
+    "otherData":"Is a woman"
+}
+#+end_src
+
+
+#+begin_src restclient
+PUT http://localhost:5101/api/user/2
+Content-Type: application/json
+{
+    "id": 2,
+    "name": "Ellie",
+    "mail": "ellie@mail.com",
+    "otherData": "Is Female"
+}
+#+end_src
+
+#+RESULTS:
+#+BEGIN_SRC js
+// PUT http://localhost:5101/api/user/2
+// HTTP/1.1 204 No Content
+// Date: Fri, 21 May 2021 21:06:11 GMT
+// Server: Kestrel
+// Request duration: 0.034393s
+#+END_SRC
