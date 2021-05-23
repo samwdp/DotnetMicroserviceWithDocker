@@ -17,15 +17,27 @@ GET http://localhost:5101/api/user
     "name": "Sam",
     "mail": "sam@mail.com",
     "otherData": "Is a man"
+  },
+  {
+    "id": 2,
+    "name": "Ellie",
+    "mail": "ellie@mail.com",
+    "otherData": "Is Female"
+  },
+  {
+    "id": 3,
+    "name": "Ellie",
+    "mail": "ellie@mail.com",
+    "otherData": "Is a woman"
   }
 ]
 // GET http://localhost:5101/api/user
 // HTTP/1.1 200 OK
-// Date: Sat, 22 May 2021 20:54:02 GMT
+// Date: Sun, 23 May 2021 15:09:55 GMT
 // Content-Type: application/json; charset=utf-8
 // Server: Kestrel
 // Transfer-Encoding: chunked
-// Request duration: 0.068460s
+// Request duration: 0.536366s
 #+END_SRC
 
 
